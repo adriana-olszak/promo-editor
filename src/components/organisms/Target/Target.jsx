@@ -1,30 +1,25 @@
-import React from 'react'
-
-import {StyledTarget} from './styled'
+import React, {useRef} from 'react'
 import {useDrop} from 'react-dnd'
-import Logo from '../Logo'
-import {generateId} from '../../../helpers/dummyId'
 
-const Target = ({
-  onDrop,
-  onMove = data => console.log(data, 'data'),
-  logos,
-}) => {
+import Logo, {LogoTypes} from '../../Logos/Logo'
+import {generateId} from '../../../helpers/dummyId'
+import {downloadImage} from '../../../helpers/download'
+import {Button} from '../../atoms'
+import {Canvas} from './styled'
+import Card from '../../Card'
+
+const Target = ({onDrop, onMove, logos, backgroundSrc}) => {
+  const downloadRef = useRef(null)
   const [{isOver}, drop] = useDrop({
-    accept: ['LogoA', 'LogoB', 'LogoC'],
+    accept: Object.keys(LogoTypes),
     drop(item, monitor) {
-      console.log(item, 'item')
       const delta = monitor.getDifferenceFromInitialOffset()
       const left = Math.round(item.left + delta.x)
       const top = Math.round(item.top + delta.y)
-      console.log(left, 'left')
-      console.log(top, 'top')
 
       if (item.id === null) {
-        console.count('onDrop')
         onDrop({...item, name: item.type, id: generateId(), left, top})
       } else {
-        console.count('onMove')
         onMove({...item, top, left})
       }
       return undefined
@@ -33,26 +28,34 @@ const Target = ({
       isOver: monitor.isOver(),
     }),
   })
-  console.log(Object.entries(logos), 'Object.entries(logos)')
 
   return (
-    <StyledTarget isOver={isOver} ref={drop}>
-      {Object.entries(logos).map(
-        ([key, {top, left, id, name, width, height}]) => {
-          return (
-            <Logo
-              height={height}
-              id={id}
-              key={key}
-              left={left}
-              top={top}
-              type={name}
-              width={width}
-            />
-          )
-        }
-      )}
-    </StyledTarget>
+    <>
+      <Card
+        gridArea={'target'}
+        headerText="Select Background"
+        ref={downloadRef}
+      >
+        <Canvas isOver={isOver} ref={drop} backgroundSrc={backgroundSrc}>
+          {Object.entries(logos).map(
+            ([key, {top, left, id, name, width, height}]) => {
+              return (
+                <Logo
+                  height={height}
+                  id={id}
+                  key={key}
+                  left={left}
+                  top={top}
+                  type={name}
+                  width={width}
+                />
+              )
+            }
+          )}
+        </Canvas>
+        <Button onClick={() => downloadImage(downloadRef)}>{'Download'}</Button>
+      </Card>
+    </>
   )
 }
 

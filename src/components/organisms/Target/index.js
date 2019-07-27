@@ -3,8 +3,9 @@ import Target from './Target'
 
 import {logoDropped, logoMoved} from '../../../redux/actions'
 
-const mapStateToProps = ({logo}) => ({
+const mapStateToProps = ({logo, background}) => ({
   logos: logo,
+  backgroundSrc: background,
 })
 
 const mapDispatchToProps = {

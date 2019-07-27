@@ -47,8 +47,9 @@ export const textRemoved = () => ({
 })
 
 export const BACKGROUND_SELECTED = 'BACKGROUND_SELECTED'
-export const backgroundSelected = () => ({
+export const backgroundSelected = url => ({
   type: BACKGROUND_SELECTED,
+  url,
 })
 
 export const BACKGROUND_REMOVED = 'BACKGROUND_REMOVED'

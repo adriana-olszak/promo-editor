@@ -1,4 +1,5 @@
 import React from 'react'
+import {PropTypes} from 'prop-types'
 import {useDrag} from 'react-dnd'
 
 import LogoA from '../../../assets/logo_one.png'
@@ -6,16 +7,20 @@ import LogoB from '../../../assets/logo_two.png'
 import LogoC from '../../../assets/logo_three.png'
 
 import {StyledLogo} from './styled'
-import PropTypes from 'prop-types'
-import {logicalExpression} from '@babel/types'
+
+export const LogoTypes = {
+  LogoA: 'LogoA',
+  LogoB: 'LogoB',
+  LogoC: 'LogoC',
+}
 
 const getLogo = type => {
   switch (type) {
-    case 'LogoA':
+    case LogoTypes.LogoA:
       return LogoA
-    case 'LogoB':
+    case LogoTypes.LogoB:
       return LogoB
-    case 'LogoC':
+    case LogoTypes.LogoC:
       return LogoC
   }
 }
@@ -45,6 +50,7 @@ const Logo = ({
       src={getLogo(type)}
       top={top}
       width={width}
+
     />
   )
 }
