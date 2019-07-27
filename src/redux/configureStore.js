@@ -1,14 +1,12 @@
 import {createStore, compose, applyMiddleware} from 'redux'
-import {createEpicMiddleware} from 'redux-observable'
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
 import {composeWithDevTools} from 'redux-devtools-extension'
 
 import rootReducer from './index'
-import rootEpic from '../epics'
 
-const configureStore = ({initialState, profile}) => {
+const configureStore = ({initialState}) => {
   const production = process.env.NODE_ENV === 'production'
-  let middlewares = [createEpicMiddleware(rootEpic)]
+  let middlewares = []
 
   if (!production) {
     middlewares = [reduxImmutableStateInvariant(), ...middlewares]
