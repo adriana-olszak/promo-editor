@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import Background from './Background'
 
-import {backgroundSelected, backgroundRemoved} from '../../../redux/actions'
+import {backgroundSelected, backgroundRemoved} from '../../redux/actions'
 
 const mapDispatchToProps = {
   onSelection: backgroundSelected,

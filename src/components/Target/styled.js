@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components'
-import emptyBackground from '../../../assets/empty_background.png'
+import emptyBackground from '../../assets/empty_background.png'
 
 export const Canvas = styled.div`
   width: 400px;

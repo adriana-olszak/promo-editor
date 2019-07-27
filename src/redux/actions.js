@@ -32,18 +32,27 @@ export const logoResized = ({id, name, size}) => ({
 })
 
 export const TEXT_ADDED = 'TEXT_ADDED'
-export const textAdded = () => ({
+export const textAdded = ({id, color, text, fontFamily, textDecoration}) => ({
   type: TEXT_ADDED,
+  id,
+  color,
+  text,
+  fontFamily,
+  textDecoration,
 })
 
 export const TEXT_MOVED = 'TEXT_MOVED'
-export const textMoved = () => ({
+export const textMoved = ({id, top, left}) => ({
   type: TEXT_MOVED,
+  id,
+  top,
+  left,
 })
 
 export const TEXT_REMOVED = 'TEXT_REMOVED'
-export const textRemoved = () => ({
+export const textRemoved = id => ({
   type: TEXT_REMOVED,
+  id,
 })
 
 export const BACKGROUND_SELECTED = 'BACKGROUND_SELECTED'
@@ -55,4 +64,18 @@ export const backgroundSelected = url => ({
 export const BACKGROUND_REMOVED = 'BACKGROUND_REMOVED'
 export const backgroundRemoved = () => ({
   type: BACKGROUND_REMOVED,
+})
+
+export const RESET_STORE = 'RESET_STORE'
+export const resetStore = () => ({
+  type: RESET_STORE,
+})
+
+export const REDO = 'REDO'
+export const redo = () => ({
+  type: REDO,
+})
+export const UNDO = 'UNDO'
+export const undo = () => ({
+  type: UNDO,
 })

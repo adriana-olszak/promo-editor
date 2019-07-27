@@ -50,7 +50,6 @@ const Logo = ({
       src={getLogo(type)}
       top={top}
       width={width}
-
     />
   )
 }

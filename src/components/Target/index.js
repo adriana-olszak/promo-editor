@@ -1,9 +1,9 @@
 import {connect} from 'react-redux'
 import Target from './Target'
 
-import {logoDropped, logoMoved} from '../../../redux/actions'
+import {logoDropped, logoMoved} from '../../redux/actions'
 
-const mapStateToProps = ({logo, background}) => ({
+const mapStateToProps = ({present: {logo, background}}) => ({
   logos: logo,
   backgroundSrc: background,
 })

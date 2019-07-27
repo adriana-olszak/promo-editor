@@ -4,7 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 
 import rootReducer from './index'
 
-const configureStore = ({initialState}) => {
+const configureStore = () => {
   const production = process.env.NODE_ENV === 'production'
   let middlewares = []
 
@@ -14,7 +14,7 @@ const configureStore = ({initialState}) => {
 
   return createStore(
     rootReducer,
-    initialState,
+    undefined,
     production
       ? compose(applyMiddleware(...middlewares))
       : composeWithDevTools(applyMiddleware(...middlewares))

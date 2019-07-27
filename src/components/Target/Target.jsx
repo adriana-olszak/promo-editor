@@ -1,12 +1,13 @@
 import React, {useRef} from 'react'
 import {useDrop} from 'react-dnd'
 
-import Logo, {LogoTypes} from '../../Logos/Logo'
-import {generateId} from '../../../helpers/dummyId'
-import {downloadImage} from '../../../helpers/download'
-import {Button} from '../../atoms'
+import Logo, {LogoTypes} from '../Logos/Logo'
+import {generateId} from '../../helpers/dummyId'
+import {downloadImage} from '../../helpers/download'
+import Button from '../Button'
+import Card from '../Card'
+
 import {Canvas} from './styled'
-import Card from '../../Card'
 
 const Target = ({onDrop, onMove, logos, backgroundSrc}) => {
   const downloadRef = useRef(null)
@@ -53,7 +54,10 @@ const Target = ({onDrop, onMove, logos, backgroundSrc}) => {
             }
           )}
         </Canvas>
-        <Button onClick={() => downloadImage(downloadRef)}>{'Download'}</Button>
+        <Button
+          onClick={() => downloadImage(downloadRef)}
+          buttonText="Download"
+        />
       </Card>
     </>
   )

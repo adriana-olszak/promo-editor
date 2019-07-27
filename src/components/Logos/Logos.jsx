@@ -2,7 +2,7 @@ import React from 'react'
 
 import Logo, {StyledLogo} from './Logo'
 import styled from 'styled-components'
-import Card, {StyledCard} from '../Card'
+import {StyledCard} from '../Card'
 
 export const LogoTypes = {
   LogoA: 'LogoA',
@@ -25,7 +25,7 @@ const LogosCard = styled(StyledCard)`
 const Logos = () => (
   <LogosCard gridArea={'logos'}>
     {Object.keys(LogoTypes).map(key => (
-      <Logo type={key} />
+      <Logo type={key} key={key} />
     ))}
   </LogosCard>
 )

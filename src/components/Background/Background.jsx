@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 
-import SearchBar from '../../SearchBar'
-import {StyledBackground, Img} from './styled'
-import Card from '../../Card'
+import SearchBar from '../SearchBar'
+import {Img} from './styled'
+import Card from '../Card'
 
 const getImage = keywords =>
   fetch(`https://source.unsplash.com/featured/?${keywords}`, {cache: 'reload'})
@@ -14,6 +14,7 @@ export default ({onSelection, onRemoveClick}) => {
   const [imgData, setImgData] = useState(Array(4).fill(undefined))
   const [keywords, setKeywords] = useState('')
 
+  // TODO API return same result if asked in a row
   useEffect(() => {
     const fetchImagesUrl = async () => {
       setIsLoading(true)
@@ -30,9 +31,10 @@ export default ({onSelection, onRemoveClick}) => {
 
   return (
     <Card gridArea={'background'} headerText="Select Background">
-      {imgData.map(data => (
+      {imgData.map((data, idx) => (
         <Img
           isLoading={isLoading}
+          key={idx} // TODO should not be like that
           onClick={() => onSelection(data)}
           src={data}
         />

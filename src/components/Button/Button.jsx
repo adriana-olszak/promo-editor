@@ -8,7 +8,6 @@ const Button = ({
   onClick,
   type,
   disabled,
-  loader,
   className,
   size,
   children,
@@ -17,8 +16,7 @@ const Button = ({
   <StyledButton
     {...rest}
     className={className}
-    disabled={loader || disabled}
-    loading={loader}
+    disabled={disabled}
     onClick={onClick}
     size={size}
     type={type}
@@ -35,7 +33,6 @@ Button.propTypes = {
   type: PropTypes.oneOf(['Input', 'primary', 'inverse', 'link']),
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  loader: PropTypes.bool,
   children: PropTypes.element,
 }
 
@@ -44,7 +41,6 @@ Button.defaultProps = {
   type: 'Input',
   size: 'm',
   disabled: false,
-  loader: false,
   onClick: () => ({}),
 }
 
