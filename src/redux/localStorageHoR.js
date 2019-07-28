@@ -16,8 +16,6 @@ export function localstorageMeta(key, reducer) {
   return function(state, action) {
     let nextState = reducer(state, action)
 
-    // TODO: should I add here an condition to hanlde only few actions??
-    // this solution is not optimized for performance
     let storageState = loadState(key)
     if (action.type === RESET_STORE) {
       localStorage.removeItem(key)

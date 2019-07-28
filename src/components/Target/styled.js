@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components'
 import emptyBackground from '../../assets/empty_background.png'
 
-export const Canvas = styled.div`
+export const StyledCanvas = styled.div`
   width: 400px;
   height: 400px;
   position: relative;
@@ -18,4 +18,12 @@ export const Canvas = styled.div`
       : css`
           opacity: 1;
         `}
+`
+
+export const OnboardingText = styled.p`
+  line-height: 1.25;
+  font-size: 16px;
+  color: #222;
+  margin: 0;
+  margin-top: 12px;
 `

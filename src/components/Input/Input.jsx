@@ -1,13 +1,26 @@
 import React from 'react'
 
-import {StyledInput} from './styled'
+import {StyledInput, StyledLabel} from './styled'
 
-const Input = ({onChange, value, label, type = 'text'}) => {
+const Input = ({
+  onChange,
+  classname,
+  placeholder,
+  value,
+  label,
+  type = 'text',
+}) => {
   return (
-    <label>
-      <input type={type} onChange={onChange} value={value} />
+    <StyledLabel>
+      <StyledInput
+        classname={classname}
+        onChange={onChange}
+        placeholder={placeholder}
+        type={type}
+        value={value}
+      />
       {label}
-    </label>
+    </StyledLabel>
   )
 }
 

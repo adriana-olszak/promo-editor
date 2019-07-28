@@ -60,3 +60,4 @@ export const BackgroundCard = styled.div`
       background-color: #ebebf0;
     `}
 `
+

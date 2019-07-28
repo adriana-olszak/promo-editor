@@ -10,11 +10,13 @@ const Button = ({
   disabled,
   className,
   size,
+  block,
   children,
   ...rest
 }) => (
   <StyledButton
     {...rest}
+    block={block}
     className={className}
     disabled={disabled}
     onClick={onClick}
@@ -28,9 +30,8 @@ const Button = ({
 
 Button.propTypes = {
   buttonText: PropTypes.string,
-  size: PropTypes.oneOf(['s', 'm', 'l']),
   className: PropTypes.string,
-  type: PropTypes.oneOf(['Input', 'primary', 'inverse', 'link']),
+  type: PropTypes.oneOf(['danger']),
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   children: PropTypes.element,
@@ -38,8 +39,6 @@ Button.propTypes = {
 
 Button.defaultProps = {
   buttonText: 'Lorem Ipsum',
-  type: 'Input',
-  size: 'm',
   disabled: false,
   onClick: () => ({}),
 }

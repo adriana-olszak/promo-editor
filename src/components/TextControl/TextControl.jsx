@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 
-import {StyledText} from './styled'
+import {StyledText, Fieldset, Label} from './styled'
 import {generateId} from '../../helpers/dummyId'
-import Card from '../Card'
 import Radio from '../Radio'
 import Input from '../Input'
 import Button from '../Button'
@@ -46,32 +45,36 @@ const TextControl = ({onAdd}) => {
     setInitialState()
   }
   return (
-    <Card gridArea="text" headerText="Add texts">
+    <StyledText gridArea="text" headerText="Add texts">
       <Input
-        label="Text"
+        placeholder="Put you text in here"
         onChange={e => setInputValue(e.target.value)}
         value={inputValue}
       />
-      <p>{'FontFamily'}</p>
-      {Object.values(FontTypes).map(fontFamily => (
-        <Radio
-          isChecked={fontFamily === fontFamilyValue}
-          label={fontFamily}
-          name="fontFamily"
-          onChange={e => setTextDecorationValue(e.target.value)}
-          value={fontFamily}
-        />
-      ))}
-      <p>{'Text Decoration'}</p>
-      {Object.values(textDecorationTypes).map(textDecoration => (
-        <Radio
-          isChecked={textDecoration === textDecorationValue}
-          label={textDecoration}
-          name="textDecoration"
-          onChange={e => setTextDecorationValue(e.target.value)}
-          value={textDecoration}
-        />
-      ))}
+      <Fieldset>
+        <Label>{'FontFamily'}</Label>
+        {Object.values(FontTypes).map(fontFamily => (
+          <Radio
+            isChecked={fontFamily === fontFamilyValue}
+            label={fontFamily}
+            name="fontFamily"
+            onChange={e => setFontFamilyValue(e.target.value)}
+            value={fontFamily}
+          />
+        ))}
+      </Fieldset>
+      <Fieldset>
+        <Label>{'Text Decoration'}</Label>
+        {Object.values(textDecorationTypes).map(textDecoration => (
+          <Radio
+            isChecked={textDecoration === textDecorationValue}
+            label={textDecoration}
+            name="textDecoration"
+            onChange={e => setTextDecorationValue(e.target.value)}
+            value={textDecoration}
+          />
+        ))}
+      </Fieldset>
       <Input
         label="Select font color"
         onChange={e => setColorValue(e.target.value)}
@@ -80,7 +83,7 @@ const TextControl = ({onAdd}) => {
         value={colorValue}
       />
       <Button onClick={onTextAdd} buttonText="Add text" />
-    </Card>
+    </StyledText>
   )
 }
 

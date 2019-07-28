@@ -8,7 +8,7 @@ const Controls = ({undo, redo, resetStore, isUndoDisabled, isRedoDisabled}) => {
     <Card headerText="Control center">
       <Button disabled={isUndoDisabled} onClick={undo} buttonText="Undo" />
       <Button disabled={isRedoDisabled} onClick={redo} buttonText="Redo" />
-      <Button onClick={resetStore} buttonText="Clear saves" />
+      <Button onClick={resetStore} type="danger" buttonText="Clear" />
     </Card>
   )
 }

@@ -16,6 +16,10 @@ import {createGlobalStyle} from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
 
+  * {
+  box-sizing: border-box;
+  }
+
   body {
     color: #222;
     padding: 12px;
@@ -34,20 +38,21 @@ const AppWrapper = styled.div`
     'background target text'
     'background target controls';
   grid-template-rows: auto;
-  grid-template-columns: 300px auto 470px;
+  grid-template-columns: 300px minmax(auto, 448px) 370px;
   grid-gap: 24px;
 `
 
 /** TODO:
  * [x] Add Txt to canvas
- * [ ] Fix issue with download not working due to Ref problems
+ * [x] Fix issue with download not working due to Ref problems
  * [x] no duplicates on unsplash api
  * [ ] UI for deleting Logos and Texts
  * [ ] Keep logos inside the container
  * [x] narrow LS history to 5 entries
  * [x] disable redo and undo  buttons when they should not be performed
- * [ ] OnBoarding text? below square area with info about auto save etc
- * [ ] UI improvements (inputs buttons)
+ * [x] OnBoarding text? below square area with info about auto save etc
+ * [x] UI improvements (inputs buttons)
+ * [ ] clear button should clear :D
  * [ ] readme
  * [ ] code clean up
  * [ ] tests

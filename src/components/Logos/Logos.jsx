@@ -21,6 +21,8 @@ const LogosCard = styled(Card)`
     position: initial;
     top: unset;
     left: unset;
+    width: 70px;
+    height: 70px;
   }
 `
 

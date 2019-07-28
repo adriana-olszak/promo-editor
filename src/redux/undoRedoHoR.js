@@ -1,4 +1,4 @@
-import {UNDO, REDO} from './actions'
+import {UNDO, REDO, RESET_STORE} from './actions'
 
 // narrow possible saves up to 5 possibilities
 // prevent from removing when there is nothing to remove
@@ -30,6 +30,9 @@ export function undoRedo(reducer) {
           present: next,
           future: newFuture,
         }
+      }
+      case RESET_STORE: {
+        return initialState
       }
       default: {
         // Delegate handling the action to the passed reducer

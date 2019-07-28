@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import SearchBar from '../SearchBar'
 import {BackgroundCard} from './styled'
 import Card from '../Card'
+import Button from '../Button'
 
 const getImage = (keywords, i) =>
   fetch(`https://source.unsplash.com/featured/?${keywords}&sig=${i}`)
@@ -40,7 +41,12 @@ export default ({onSelection, onRemoveClick}) => {
         />
       ))}
       <SearchBar onClick={setKeywords} />
-      <button onClick={onRemoveClick}>Remove background </button>
+      <Button
+        buttonText="Remove background"
+        block={true}
+        type="danger"
+        onClick={onRemoveClick}
+      />
     </Card>
   )
 }

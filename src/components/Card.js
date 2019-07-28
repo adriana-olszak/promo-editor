@@ -19,7 +19,7 @@ export const CardBody = styled.div`
   margin-top: -20px;
   border-radius: 17px;
   background-color: white;
-  padding: 24px;
+  padding: 21px;
 `
 
 export const Header = styled.header`
