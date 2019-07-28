@@ -1,16 +1,18 @@
 import {connect} from 'react-redux'
 import Target from './Target'
 
-import {logoDropped, logoMoved} from '../../redux/actions'
+import {logoDropped, logoMoved, textMoved} from '../../redux/actions'
 
-const mapStateToProps = ({present: {logo, background}}) => ({
+const mapStateToProps = ({present: {logo, text, background}}) => ({
   logos: logo,
+  texts: text,
   backgroundSrc: background,
 })
 
 const mapDispatchToProps = {
-  onDrop: logoDropped,
-  onMove: logoMoved,
+  onLogoDrop: logoDropped,
+  onLogoMove: logoMoved,
+  onTextMove: textMoved,
 }
 
 export default connect(

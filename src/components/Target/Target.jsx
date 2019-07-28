@@ -8,21 +8,35 @@ import Button from '../Button'
 import Card from '../Card'
 
 import {Canvas} from './styled'
+import {Text} from '../TextControl'
 
-const Target = ({onDrop, onMove, logos, backgroundSrc}) => {
+const Target = ({
+  onLogoDrop,
+  onLogoMove,
+  onTextDrop,
+  onTextMove,
+  logos,
+  texts,
+  backgroundSrc,
+}) => {
   const downloadRef = useRef(null)
   const [{isOver}, drop] = useDrop({
-    accept: Object.keys(LogoTypes),
+    accept: [...Object.keys(LogoTypes), 'TEXT'],
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset()
       const left = Math.round(item.left + delta.x)
       const top = Math.round(item.top + delta.y)
 
-      if (item.id === null) {
-        onDrop({...item, name: item.type, id: generateId(), left, top})
+      if (item.type === 'TEXT') {
+        onTextMove({...item, top, left})
       } else {
-        onMove({...item, top, left})
+        if (item.id === null) {
+          onLogoDrop({...item, name: item.type, id: generateId(), left, top})
+        } else {
+          onLogoMove({...item, top, left})
+        }
       }
+
       return undefined
     },
     collect: monitor => ({
@@ -39,7 +53,7 @@ const Target = ({onDrop, onMove, logos, backgroundSrc}) => {
       >
         <Canvas isOver={isOver} ref={drop} backgroundSrc={backgroundSrc}>
           {Object.entries(logos).map(
-            ([key, {top, left, id, name, width, height}]) => {
+            ([key, {id, left, top, name, height, width}]) => {
               return (
                 <Logo
                   height={height}
@@ -53,10 +67,29 @@ const Target = ({onDrop, onMove, logos, backgroundSrc}) => {
               )
             }
           )}
+          {Object.entries(texts).map(
+            ([
+              key,
+              {id, left, top, fontFamily, textDecoration, text, color},
+            ]) => {
+              return (
+                <Text
+                  fontFamily={fontFamily}
+                  id={id}
+                  key={key}
+                  left={left}
+                  top={top}
+                  textDecoration={textDecoration}
+                  text={text}
+                  color={color}
+                />
+              )
+            }
+          )}
         </Canvas>
         <Button
-          onClick={() => downloadImage(downloadRef)}
           buttonText="Download"
+          onClick={() => downloadImage(downloadRef)}
         />
       </Card>
     </>

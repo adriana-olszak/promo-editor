@@ -8,7 +8,7 @@ import Background from './components/Background'
 import Controls from './components/Controls'
 import Target from './components/Target'
 import Logos from './components/Logos'
-import Text from './components/Text'
+import Text from './components/TextControl'
 
 import configureStore from './redux/configureStore'
 import {createGlobalStyle} from 'styled-components'
@@ -39,7 +39,7 @@ const AppWrapper = styled.div`
 `
 
 /** TODO:
- * [ ] Add Txt to canvas
+ * [x] Add Txt to canvas
  * [ ] Fix issue with download not working due to Ref problems
  * [x] no duplicates on unsplash api
  * [ ] UI for deleting Logos and Texts

@@ -4,7 +4,16 @@ const textReducer = (state = {}, action) => {
   switch (action.type) {
     case TEXT_REMOVED:
       return Object.keys(state).filter(key => key !== action.id)
-    case TEXT_MOVED:
+    case TEXT_MOVED: {
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          top: action.top,
+          left: action.left,
+        },
+      }
+    }
     case TEXT_ADDED: {
       return {
         ...state,

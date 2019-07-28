@@ -1,7 +1,8 @@
 import {connect} from 'react-redux'
-import Text from './Text'
-
+import TextControl from './TextControl'
 import {textAdded} from '../../redux/actions'
+
+export {default as Text} from './Text'
 
 const mapDispatchToProps = {
   onAdd: textAdded,
@@ -10,4 +11,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps
-)(Text)
+)(TextControl)
