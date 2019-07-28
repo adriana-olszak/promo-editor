@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-import {StyledText, Fieldset, Label} from './styled'
+import {StyledText, Fieldset, Label, ColorInput} from './styled'
 import {generateId} from '../../helpers/dummyId'
 import Radio from '../Radio'
 import Input from '../Input'
@@ -47,7 +47,7 @@ const TextControl = ({onAdd}) => {
   return (
     <StyledText gridArea="text" headerText="Add texts">
       <Input
-        placeholder="Put you text in here"
+        placeholder="Put your text in here"
         onChange={e => setInputValue(e.target.value)}
         value={inputValue}
       />
@@ -75,7 +75,7 @@ const TextControl = ({onAdd}) => {
           />
         ))}
       </Fieldset>
-      <Input
+      <ColorInput
         label="Select font color"
         onChange={e => setColorValue(e.target.value)}
         type="color"

@@ -46,13 +46,13 @@ const AppWrapper = styled.div`
  * [x] Add Txt to canvas
  * [x] Fix issue with download not working due to Ref problems
  * [x] no duplicates on unsplash api
- * [ ] UI for deleting Logos and Texts
+ * [x] UI for deleting Logos and Texts
  * [ ] Keep logos inside the container
  * [x] narrow LS history to 5 entries
  * [x] disable redo and undo  buttons when they should not be performed
  * [x] OnBoarding text? below square area with info about auto save etc
  * [x] UI improvements (inputs buttons)
- * [ ] clear button should clear :D
+ * [x] clear button should clear :D
  * [ ] readme
  * [ ] code clean up
  * [ ] tests

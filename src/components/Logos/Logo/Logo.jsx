@@ -32,6 +32,8 @@ const Logo = ({
   type,
   width = 100,
   height = 100,
+  className,
+  onContextMenu = () => ({}),
 }) => {
   const [{isDragging}, drag] = useDrag({
     item: {id, left, top, type: `${type}`, width, height},
@@ -43,9 +45,13 @@ const Logo = ({
   return (
     <StyledLogo
       alt={type}
+      className={className}
+      data-id={id}
+      data-type="LOGO"
       height={height}
       isDragging={isDragging}
       left={left}
+      onContextMenu={onContextMenu}
       ref={drag}
       src={getLogo(type)}
       top={top}
@@ -61,6 +67,7 @@ Logo.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   type: PropTypes.string.isRequired,
+  onContextMenu: PropTypes.func,
 }
 
 export default Logo

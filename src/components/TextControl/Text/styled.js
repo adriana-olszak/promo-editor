@@ -35,5 +35,6 @@ export const StyledText = styled.div`
         `
       : css`
           cursor: move;
+          border: none;
         `}
 `

@@ -1,14 +1,8 @@
 import React from 'react'
 
-import Logo, {StyledLogo} from './Logo'
+import Logo, {LogoTypes, StyledLogo} from './Logo'
 import styled from 'styled-components'
 import Card, {CardBody} from '../Card'
-
-export const LogoTypes = {
-  LogoA: 'LogoA',
-  LogoB: 'LogoB',
-  LogoC: 'LogoC',
-}
 
 const LogosCard = styled(Card)`
   ${CardBody} {

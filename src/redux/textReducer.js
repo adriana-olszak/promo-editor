@@ -3,7 +3,9 @@ import {TEXT_ADDED, TEXT_MOVED, TEXT_REMOVED} from './actions'
 const textReducer = (state = {}, action) => {
   switch (action.type) {
     case TEXT_REMOVED:
-      return Object.keys(state).filter(key => key !== action.id)
+      return Object.fromEntries(
+        Object.entries(state).filter(([key]) => key !== action.id)
+      )
     case TEXT_MOVED: {
       return {
         ...state,

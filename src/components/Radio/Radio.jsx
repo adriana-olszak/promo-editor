@@ -1,6 +1,5 @@
 import React from 'react'
 
-import {StyledRadio} from './styled'
 const Radio = ({value, label, name, isChecked, onChange}) => {
   return (
     <label>

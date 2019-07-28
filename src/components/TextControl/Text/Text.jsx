@@ -12,6 +12,7 @@ const Text = ({
   fontFamily,
   textDecoration,
   text,
+  onContextMenu = () => ({}),
 }) => {
   const [{isDragging}, drag] = useDrag({
     item: {id, left, top, type: 'TEXT'},
@@ -23,9 +24,12 @@ const Text = ({
   return (
     <StyledText
       color={color}
+      data-id={id}
+      data-type="TEXT"
       fontFamily={fontFamily}
       isDragging={isDragging}
       left={left}
+      onContextMenu={onContextMenu}
       ref={drag}
       textDecoration={textDecoration}
       top={top}

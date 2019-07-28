@@ -9,11 +9,15 @@ import Card from '../Card'
 
 import {StyledCanvas, OnboardingText} from './styled'
 import {Text} from '../TextControl'
+import {ContextMenu, ContextMenuContainer} from '../ContexMenu/ContextMenu'
+import PropTypes from 'prop-types'
 
 const Target = ({
   onLogoDrop,
   onLogoMove,
   onTextMove,
+  onLogoRemove,
+  onTextRemove,
   logos,
   texts,
   backgroundSrc,
@@ -46,63 +50,88 @@ const Target = ({
   return (
     <>
       <Card gridArea={'target'} headerText="Select Background">
-        <div ref={downloadRef}>
-          <StyledCanvas
-            backgroundSrc={backgroundSrc}
-            isOver={isOver}
-            ref={drop}
-          >
-            {Object.entries(logos).map(
-              ([key, {id, left, top, name, height, width}]) => {
-                return (
+        <ContextMenuContainer
+          onLogoRemove={onLogoRemove}
+          onTextRemove={onTextRemove}
+        >
+          <div ref={downloadRef}>
+            <StyledCanvas
+              backgroundSrc={backgroundSrc}
+              isOver={isOver}
+              ref={drop}
+            >
+              {Object.values(logos).map(
+                ({id, left, top, name, height, width}) => (
                   <Logo
                     height={height}
                     id={id}
-                    key={key}
+                    key={id}
                     left={left}
                     top={top}
                     type={name}
                     width={width}
                   />
                 )
-              }
-            )}
-            {Object.entries(texts).map(
-              ([
-                key,
-                {id, left, top, fontFamily, textDecoration, text, color},
-              ]) => {
-                return (
+              )}
+              {Object.values(texts).map(
+                ({id, left, top, fontFamily, textDecoration, text, color}) => (
                   <Text
+                    color={color}
                     fontFamily={fontFamily}
                     id={id}
-                    key={key}
+                    key={id}
                     left={left}
-                    top={top}
-                    textDecoration={textDecoration}
                     text={text}
-                    color={color}
+                    textDecoration={textDecoration}
+                    top={top}
                   />
                 )
-              }
-            )}
-          </StyledCanvas>
-        </div>
+              )}
+            </StyledCanvas>
+          </div>
+        </ContextMenuContainer>
         <Button
           block={true}
           buttonText="Download"
-          style={{marginTop: '22px'}}
           onClick={() => downloadImage(downloadRef.current)}
+          style={{marginTop: '22px'}}
         />
         <OnboardingText>
-          Welcome to pomo image editor. In the left panel you can search for
-          best backround and delete it. On the right you can find predefined
+          Welcome to image editor. In the left panel you can search for best
+          background and delete it. On the right you can find predefined
           logotypes, text configurator and control panel on which you can redo
           and undo up to 5 actions. We save your progress automatically.
         </OnboardingText>
       </Card>
     </>
   )
+}
+
+Target.propTypes = {
+  onLogoDrop: PropTypes.func.isRequired,
+  onLogoMove: PropTypes.func.isRequired,
+  onTextMove: PropTypes.func.isRequired,
+  logos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      top: PropTypes.number.isRequired,
+      left: PropTypes.number.isRequired,
+    })
+  ),
+  texts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      fontFamily: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      textDecoration: PropTypes.string.isRequired,
+      top: PropTypes.number.isRequired,
+      left: PropTypes.number.isRequired,
+    })
+  ),
+  backgroundSrc: PropTypes.string.isRequired,
 }
 
 export default Target

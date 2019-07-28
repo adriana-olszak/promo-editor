@@ -1,5 +1,4 @@
-import React from 'react'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 
 export const StyledCard = styled.div`
   grid-area: ${props => props.gridArea};
@@ -26,7 +25,6 @@ export const Header = styled.header`
   padding: 12px;
   padding-bottom: 30px;
   color: white;
-  font-size: 16px;
   line-height: 1.5;
   text-align: center;
   border-radius: 10px 10px 0 0;
@@ -36,24 +34,11 @@ export const Header = styled.header`
     #7918f2 48%,
     #4801ff 100%
   );
+  font-size: 15px;
+  text-transform: uppercase;
 `
 
 export const Title = styled.h3`
   margin: 0;
   font-size: 16px;
 `
-
-export default ({
-  children,
-  headerText,
-  className,
-  hNumber = 'h2',
-  gridArea,
-}) => (
-  <StyledCard className={className} gridArea={gridArea}>
-    <Header>
-      <Title as={hNumber}>{headerText}</Title>
-    </Header>
-    <CardBody>{children}</CardBody>
-  </StyledCard>
-)

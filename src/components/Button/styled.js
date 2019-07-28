@@ -26,6 +26,14 @@ export const StyledButton = styled.button`
   ${props =>
     props.type === 'danger' &&
     css`
-      background: red;
+      background: #d50b0b;
     `}
+  
+   ${props =>
+     props.disabled &&
+     css`
+       background: #eee;
+       color: #222;
+     `}
+
 `

@@ -8,9 +8,8 @@ export const logoDropped = ({id, type, top, left}) => ({
 })
 
 export const LOGO_REMOVED = 'LOGO_REMOVED'
-export const logoRemoved = (id, name) => ({
+export const logoRemoved = id => ({
   type: LOGO_REMOVED,
-  name,
   id,
 })
 

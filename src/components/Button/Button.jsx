@@ -9,7 +9,6 @@ const Button = ({
   type,
   disabled,
   className,
-  size,
   block,
   children,
   ...rest
@@ -20,7 +19,6 @@ const Button = ({
     className={className}
     disabled={disabled}
     onClick={onClick}
-    size={size}
     type={type}
   >
     <span>{buttonText}</span>
@@ -34,12 +32,14 @@ Button.propTypes = {
   type: PropTypes.oneOf(['danger']),
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  block: PropTypes.bool,
   children: PropTypes.element,
 }
 
 Button.defaultProps = {
   buttonText: 'Lorem Ipsum',
   disabled: false,
+  block: false,
   onClick: () => ({}),
 }
 

@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react'
+import PropTypes from 'prop-types'
 
 import SearchBar from '../SearchBar'
-import {BackgroundCard} from './styled'
 import Card from '../Card'
 import Button from '../Button'
+
+import {BackgroundCard} from './styled'
 
 const getImage = (keywords, i) =>
   fetch(`https://source.unsplash.com/featured/?${keywords}&sig=${i}`)
     .then(data => data.url)
     .catch(err => console.error('Fetching surveyUuid failed', err))
 
-export default ({onSelection, onRemoveClick}) => {
+const Background = ({onSelection, onRemoveClick}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [imgData, setImgData] = useState(Array(4).fill(undefined))
   const [keywords, setKeywords] = useState('')
@@ -42,11 +44,18 @@ export default ({onSelection, onRemoveClick}) => {
       ))}
       <SearchBar onClick={setKeywords} />
       <Button
-        buttonText="Remove background"
         block={true}
-        type="danger"
+        buttonText="Remove background"
         onClick={onRemoveClick}
+        type="danger"
       />
     </Card>
   )
 }
+
+Background.propTypes = {
+  onSelection: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
+}
+
+export default Background
