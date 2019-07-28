@@ -3,11 +3,11 @@ import React from 'react'
 import Button from '../Button'
 import Card from '../Card'
 
-const Controls = ({undo, redo, resetStore}) => {
+const Controls = ({undo, redo, resetStore, isUndoDisabled, isRedoDisabled}) => {
   return (
     <Card headerText="Control center">
-      <Button onClick={undo} buttonText="Undo" />
-      <Button onClick={redo} buttonText="Redo" />
+      <Button disabled={isUndoDisabled} onClick={undo} buttonText="Undo" />
+      <Button disabled={isRedoDisabled} onClick={redo} buttonText="Redo" />
       <Button onClick={resetStore} buttonText="Clear saves" />
     </Card>
   )

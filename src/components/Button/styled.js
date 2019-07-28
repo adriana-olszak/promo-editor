@@ -1,3 +1,3 @@
 import styled from 'styled-components'
 
-export const StyledButton = styled.div``
+export const StyledButton = styled.button``

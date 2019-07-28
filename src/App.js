@@ -34,9 +34,25 @@ const AppWrapper = styled.div`
     'background target text'
     'background target controls';
   grid-template-rows: auto;
-  grid-template-columns: 300px 430px 450px;
+  grid-template-columns: 300px auto 470px;
   grid-gap: 24px;
 `
+
+/** TODO:
+ * [ ] Add Txt to canvas
+ * [ ] Fix issue with download not working due to Ref problems
+ * [x] no duplicates on unsplash api
+ * [ ] UI for deleting Logos and Texts
+ * [ ] Keep logos inside the container
+ * [x] narrow LS history to 5 entries
+ * [x] disable redo and undo  buttons when they should not be performed
+ * [ ] OnBoarding text? below square area with info about auto save etc
+ * [ ] UI improvements (inputs buttons)
+ * [ ] readme
+ * [ ] code clean up
+ * [ ] tests
+ *
+ */
 
 function App() {
   return (

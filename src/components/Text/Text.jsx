@@ -46,33 +46,42 @@ const Text = ({onAdd}) => {
           onChange={e => setInputValue(e.target.value)}
           value={inputValue}
         />
+        Text
       </label>
       {
         // TODO: move to component
       }
+      <p>FontFamily</p>
       {Object.values(FontTypes).map(fontFamily => (
-        <label key={fontFamily}>
+        <>
           <input
             checked={fontFamily === fontFamilyValue}
             name="fontFamily"
             onChange={e => setFontFamilyValue(e.target.value)}
             type="radio"
             value={fontFamily}
+            id={fontFamily}
           />
-          {fontFamily}
-        </label>
+          <label key={fontFamily} htmlFor={fontFamily}>
+            {fontFamily}
+          </label>
+        </>
       ))}
+      <p>Text Decoration</p>
       {Object.values(textDecorationTypes).map(textDecoration => (
-        <label key={textDecoration}>
+        <>
           <input
             checked={textDecoration === textDecorationValue}
             name="textDecoration"
             onChange={e => settextDecorationValue(e.target.value)}
             type="radio"
+            id={textDecoration}
             value={textDecoration}
           />
-          {textDecoration}
-        </label>
+          <label key={textDecoration} htmlFor={textDecoration}>
+            {textDecoration}
+          </label>
+        </>
       ))}
       <label>
         {'Select font color'}

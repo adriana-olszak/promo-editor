@@ -4,7 +4,6 @@ import emptyBackground from '../../assets/empty_background.png'
 export const Canvas = styled.div`
   width: 400px;
   height: 400px;
-  border: 1px solid grey;
   position: relative;
   background-image: url(${props => props.backgroundSrc || emptyBackground});
   background-position: center;

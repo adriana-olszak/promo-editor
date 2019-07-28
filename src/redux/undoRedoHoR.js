@@ -37,8 +37,9 @@ export function undoRedo(reducer) {
         if (present === newPresent) {
           return state
         }
+
         return {
-          past: [...past, present],
+          past: [...(past.length === 5 ? past.slice(1) : past), present], // to store only 5 fresh steps
           present: newPresent,
           future: [],
         }

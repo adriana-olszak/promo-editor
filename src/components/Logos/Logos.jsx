@@ -2,7 +2,7 @@ import React from 'react'
 
 import Logo, {StyledLogo} from './Logo'
 import styled from 'styled-components'
-import {StyledCard} from '../Card'
+import Card, {CardBody} from '../Card'
 
 export const LogoTypes = {
   LogoA: 'LogoA',
@@ -10,10 +10,12 @@ export const LogoTypes = {
   LogoC: 'LogoC',
 }
 
-const LogosCard = styled(StyledCard)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+const LogosCard = styled(Card)`
+  ${CardBody} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
   ${StyledLogo} {
     position: initial;
@@ -23,7 +25,7 @@ const LogosCard = styled(StyledCard)`
 `
 
 const Logos = () => (
-  <LogosCard gridArea={'logos'}>
+  <LogosCard gridArea={'logos'} headerText="Select Logo">
     {Object.keys(LogoTypes).map(key => (
       <Logo type={key} key={key} />
     ))}

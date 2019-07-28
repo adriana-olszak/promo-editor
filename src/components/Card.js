@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, {css} from 'styled-components'
 
-export const StyledCard = styled.div.attrs(className => ({className}))`
+export const StyledCard = styled.div`
   grid-area: ${props => props.gridArea};
   border-radius: 20px;
   border: 1px solid lightgray;
@@ -19,7 +19,7 @@ export const CardBody = styled.div`
   margin-top: -20px;
   border-radius: 17px;
   background-color: white;
-  padding: 12px;
+  padding: 24px;
 `
 
 export const Header = styled.header`
@@ -43,8 +43,14 @@ export const Title = styled.h3`
   font-size: 16px;
 `
 
-export default ({children, headerText, hNumber = 'h2', gridArea}) => (
-  <StyledCard gridArea={gridArea}>
+export default ({
+  children,
+  headerText,
+  className,
+  hNumber = 'h2',
+  gridArea,
+}) => (
+  <StyledCard className={className} gridArea={gridArea}>
     <Header>
       <Title as={hNumber}>{headerText}</Title>
     </Header>
