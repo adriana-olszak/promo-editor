@@ -11,6 +11,7 @@ const textReducer = (state = {}, action) => {
         ...state,
         [action.id]: {
           ...state[action.id],
+          center: false,
           top: action.top,
           left: action.left,
         },
@@ -26,8 +27,9 @@ const textReducer = (state = {}, action) => {
           fontFamily: action.fontFamily,
           textDecoration: action.textDecoration,
           type: 'TEXT',
-          top: action.top || 0,
-          left: action.left || 0,
+          center: true,
+          top: action.top,
+          left: action.left,
         },
       }
     }

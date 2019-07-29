@@ -16,7 +16,6 @@ export const StyledText = styled.div`
   position: absolute;
   font-size: 20px;
   border: 1px dashed gray;
-  padding: 0.5rem 1rem;
   cursor: move;
   
   ${({top, left, center}) =>
@@ -29,6 +28,7 @@ export const StyledText = styled.div`
       : css`
           top: ${top}px;
           left: ${left}px;
+          transform: translate(-100%, 100%);
         `}
   
   color: ${props => props.color || 'black'};

@@ -6,8 +6,9 @@ import {StyledText} from './styled'
 
 const Text = ({
   id = null,
-  left = 0,
-  top = 0,
+  left,
+  top,
+  center,
   color,
   fontFamily,
   textDecoration,
@@ -16,6 +17,23 @@ const Text = ({
 }) => {
   const [{isDragging}, drag] = useDrag({
     item: {id, left, top, type: 'TEXT'},
+    begin: monitor => {
+      const {x, y} = monitor.getInitialSourceClientOffset()
+      console.log(
+        monitor.getInitialSourceClientOffset(),
+        'monitor.getInitialSourceClientOffset()'
+      )
+      console.log(
+        monitor.getInitialClientOffset(),
+        'monitor.getInitialClientOffset()'
+      )
+      return {
+        left: x,
+        top: y,
+        type: 'TEXT',
+        id,
+      }
+    },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
@@ -23,6 +41,7 @@ const Text = ({
 
   return (
     <StyledText
+      center={center}
       color={color}
       data-id={id}
       data-type="TEXT"

@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import {StyledCheckbox, Input, Label} from './styled'
 
 const Checkbox = ({selected, options, name, onChange}) => {
-  console.log(options, 'options')
-  console.log(selected, 'selected')
-  console.log(name, 'name')
-  console.log(onChange, 'onChange')
   const toggleOption = option => {
     selected.includes(option)
       ? onChange(selected.filter(selectedOption => selectedOption !== option))

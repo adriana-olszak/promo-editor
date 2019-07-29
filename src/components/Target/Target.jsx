@@ -28,13 +28,19 @@ const Target = ({
     accept: [...Object.keys(LogoTypes), 'TEXT'],
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset()
-      // this calculations are required due to change of context
-      const left = Math.round(item.left + delta.x - item.width - targetWidth)
-      const top = Math.round(item.top + delta.y - item.height)
 
       if (item.type === 'TEXT') {
+        const left = Math.round(item.left + delta.x - targetWidth)
+        const top = Math.round(item.top + delta.y)
+
         onTextMove({...item, top, left})
       } else {
+        // this calculations are required due to change of context
+        const left = Math.round(
+          item.left + delta.x - (item.width || 0) - targetWidth
+        )
+        const top = Math.round(item.top + delta.y - (item.height || 0))
+
         if (item.id === null) {
           onLogoDrop({...item, name: item.type, id: generateId(), left, top})
         } else {
@@ -138,7 +144,7 @@ Target.propTypes = {
       id: PropTypes.string.isRequired,
       fontFamily: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired,
-      textDecoration: PropTypes.string.isRequired,
+      textDecoration: PropTypes.arrayOf(PropTypes.string).isRequired,
       top: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,
     })
