@@ -8,8 +8,9 @@ const getTextDecoration = textDecorations =>
         return acc + 'font-style: italic;'
       case 'UNDERLINE':
         return acc + 'text-decoration: underline;'
+      default:
+        return acc
     }
-    return acc
   }, '')
 
 export const StyledText = styled.div`
@@ -28,7 +29,7 @@ export const StyledText = styled.div`
       : css`
           top: ${top}px;
           left: ${left}px;
-          transform: translate(-100%, 100%);
+          transform: translate(-100%, -200%);
         `}
   
   color: ${props => props.color || 'black'};

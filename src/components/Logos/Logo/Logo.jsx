@@ -22,6 +22,8 @@ const getLogo = type => {
       return LogoB
     case LogoTypes.LogoC:
       return LogoC
+    default:
+      return LogoTypes.LogoA
   }
 }
 
@@ -72,7 +74,8 @@ const Logo = ({
 }
 
 Logo.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  className: PropTypes.string,
   left: PropTypes.number,
   top: PropTypes.number,
   width: PropTypes.number,

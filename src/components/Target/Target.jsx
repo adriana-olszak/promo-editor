@@ -9,7 +9,7 @@ import Card from '../Card'
 
 import {StyledCanvas, OnboardingText} from './styled'
 import {Text} from '../TextControl'
-import {ContextMenu, ContextMenuContainer} from '../ContexMenu/ContextMenu'
+import ContextMenuContainer from '../ContexMenu/ContextMenu'
 import PropTypes from 'prop-types'
 
 const Target = ({
@@ -24,28 +24,34 @@ const Target = ({
 }) => {
   const targetWidth = 400
   const downloadRef = useRef(null)
+
+  const handleText = ({item, x, y}) => {
+    const left = Math.round(item.left + x - targetWidth)
+    const top = Math.round(item.top + y)
+
+    onTextMove({...item, top, left})
+  }
+
+  const handleLogo = ({item, x, y}) => {
+    const left = Math.round(item.left + x - item.width - targetWidth)
+    const top = Math.round(item.top + y - item.height)
+
+    if (item.id === null) {
+      onLogoDrop({...item, id: generateId(), left, top})
+    } else {
+      onLogoMove({...item, left, top})
+    }
+  }
+
   const [{isOver}, drop] = useDrop({
     accept: [...Object.keys(LogoTypes), 'TEXT'],
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset()
 
       if (item.type === 'TEXT') {
-        const left = Math.round(item.left + delta.x - targetWidth)
-        const top = Math.round(item.top + delta.y)
-
-        onTextMove({...item, top, left})
+        handleText({item, ...delta})
       } else {
-        // this calculations are required due to change of context
-        const left = Math.round(
-          item.left + delta.x - (item.width || 0) - targetWidth
-        )
-        const top = Math.round(item.top + delta.y - (item.height || 0))
-
-        if (item.id === null) {
-          onLogoDrop({...item, name: item.type, id: generateId(), left, top})
-        } else {
-          onLogoMove({...item, top, left})
-        }
+        handleLogo({item, ...delta})
       }
 
       return undefined
@@ -56,72 +62,39 @@ const Target = ({
   })
 
   return (
-    <>
-      <Card gridArea={'target'} headerText="Select Background">
+    <Card gridArea={'target'} headerText="Select Background">
+      <div ref={downloadRef}>
         <ContextMenuContainer
           onLogoRemove={onLogoRemove}
           onTextRemove={onTextRemove}
         >
-          <div ref={downloadRef}>
-            <StyledCanvas
-              backgroundSrc={backgroundSrc}
-              isOver={isOver}
-              ref={drop}
-            >
-              {Object.values(logos).map(
-                ({id, left, top, name, height, width}) => (
-                  <Logo
-                    height={height}
-                    id={id}
-                    key={id}
-                    left={left}
-                    top={top}
-                    type={name}
-                    width={width}
-                  />
-                )
-              )}
-              {Object.values(texts).map(
-                ({
-                  id,
-                  left,
-                  top,
-                  center,
-                  fontFamily,
-                  textDecoration,
-                  text,
-                  color,
-                }) => (
-                  <Text
-                    center={center}
-                    color={color}
-                    fontFamily={fontFamily}
-                    id={id}
-                    key={id}
-                    left={left}
-                    text={text}
-                    textDecoration={textDecoration}
-                    top={top}
-                  />
-                )
-              )}
-            </StyledCanvas>
-          </div>
+          <StyledCanvas
+            backgroundSrc={backgroundSrc}
+            isOver={isOver}
+            ref={drop}
+          >
+            {Object.values(logos).map(attrs => (
+              <Logo {...attrs} key={attrs.id} />
+            ))}
+            {Object.values(texts).map(attrs => (
+              <Text {...attrs} key={attrs.id} />
+            ))}
+          </StyledCanvas>
         </ContextMenuContainer>
-        <Button
-          block={true}
-          buttonText="Download"
-          onClick={() => downloadImage(downloadRef.current)}
-          style={{marginTop: '22px'}}
-        />
-        <OnboardingText>
-          Welcome to image editor. In the left panel you can search for best
-          background and delete it. On the right you can find predefined
-          logotypes, text configurator and control panel on which you can redo
-          and undo up to 5 actions. We save your progress automatically.
-        </OnboardingText>
-      </Card>
-    </>
+      </div>
+      <Button
+        block={true}
+        buttonText="Download"
+        onClick={() => downloadImage(downloadRef.current)}
+        style={{marginTop: '22px'}}
+      />
+      <OnboardingText>
+        Welcome to image editor. In the left panel you can search for background
+        and delete it via click on button. On the right you can find predefined
+        logotypes, text configurator and control panel on which you can redo and
+        undo up to 5 actions. We save your progress automatically.
+      </OnboardingText>
+    </Card>
   )
 }
 
@@ -129,10 +102,12 @@ Target.propTypes = {
   onLogoDrop: PropTypes.func.isRequired,
   onLogoMove: PropTypes.func.isRequired,
   onTextMove: PropTypes.func.isRequired,
+  onLogoRemove: PropTypes.func.isRequired,
+  onTextRemove: PropTypes.func.isRequired,
   logos: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
       // width: PropTypes.number.isRequired,
       // height: PropTypes.number.isRequired,
       top: PropTypes.number.isRequired,

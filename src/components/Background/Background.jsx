@@ -10,7 +10,7 @@ import {BackgroundCard} from './styled'
 const getImage = (keywords, i) =>
   fetch(`https://source.unsplash.com/featured/?${keywords}&sig=${i}`)
     .then(data => data.url)
-    .catch(err => console.error('Fetching surveyUuid failed', err))
+    .catch(err => console.error('Fetching image failed', err))
 
 const Background = ({onSelection, onRemoveClick}) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -20,28 +20,30 @@ const Background = ({onSelection, onRemoveClick}) => {
   useEffect(() => {
     const fetchImagesUrl = async () => {
       setIsLoading(true)
-      let imgsData = []
+      let imagesData = []
       for (let i = 0; i < imgData.length; i++) {
         const url = await getImage(keywords, i)
-        imgsData = [...imgsData, url]
+        imagesData = [...imagesData, url]
       }
-      setImgData(imgsData)
+      setImgData(imagesData)
       setIsLoading(false)
     }
 
     fetchImagesUrl()
-  }, [keywords])
+  }, [keywords, imgData.length])
 
   return (
     <Card gridArea={'background'} headerText="Select Background">
-      {imgData.map((data, idx) => (
-        <BackgroundCard
-          isLoading={isLoading}
-          key={idx} // TODO should not be like that
-          onClick={() => onSelection(data)}
-          src={data}
-        />
-      ))}
+      <>
+        {imgData.map((data, idx) => (
+          <BackgroundCard
+            isLoading={isLoading}
+            key={idx} // TODO should not be like that
+            onClick={() => onSelection(data)}
+            src={data}
+          />
+        ))}
+      </>
       <SearchBar onClick={setKeywords} />
       <Button
         block={true}

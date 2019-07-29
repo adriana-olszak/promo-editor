@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Card, {CardBody} from '../Card'
 import Input from '../Input'
-import {StyledInput, StyledLabel} from '../Input/styled'
+import {StyledInput} from '../Input/styled'
 
 export const StyledText = styled(Card)`
   ${CardBody} {

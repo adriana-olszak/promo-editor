@@ -12,14 +12,14 @@ Application will be available on `http://localhost:3000`
 
 ## Features
 
-### Background area
+### Background area (2h)
 
 - User can select from 4 backgrounds fetched on app init
 - Click on background thumbnail - sets image as background for editor area
 - Click on “Delete Background” - cleans background
 - user can search for background by given keywords
 
-### Logo area
+### Logo area (4h + 1h bug fix)
 
 - User is able to add logo via drag’n’drop. On drop to the editor area create 100px x
   100px logo
@@ -28,9 +28,7 @@ Application will be available on `http://localhost:3000`
 - Right click on logo shows contex menu with “delete” button.
 - Click on “delete” button removes logo from editor.
 
-[ + ] Logo should be always in bounds of editor area.
-
-### Text area
+### Text area (3h + 1h bug fix)
 
 - User is able to add text to the editor.
 - User is able to provide his own text via text Input.
@@ -45,11 +43,13 @@ Application will be available on `http://localhost:3000`
 - User can set bold / underline / italic on text
 - Download as image button
 
-### Save / Load
+### Save / Load (1h)
 
 - Automatically saves after every change.
 - automatically loads last state window refresh.
 - undo/redo possibility of last 5 changes
+
+### Styles (1h)
 
 ## Architecture solutions
 
@@ -61,14 +61,11 @@ It is also straightforward to read and removes the burden of calling some kind o
 Such solution allows also enhance of single reducer with given functionality.
 If we will write test it will also minimise the complexity of test if we abstract some logic to HoR.
 
-### Hooks
-
-
-
 ### Fetch
 
-For fetching images I used browser Fetch API that have all what is needed to perform fetching of images. 
-As we did
+For fetching images I used browser Fetch API that have all what is needed to perform such a simple task.
+For bigger application I'll use RxJS (redux-observable) which will allow e.g. cancellation of request or dispach of multiple actions.
 
-
-### Download
+## Pain points during development
+1. Positioning of elements using react-dnd monitors when drop element is dragged from outside of target.
+2. Positioning of texts in the center of target.

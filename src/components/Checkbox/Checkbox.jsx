@@ -37,8 +37,9 @@ const Checkbox = ({selected, options, name, onChange}) => {
 }
 Checkbox.propTypes = {
   selected: PropTypes.array.isRequired,
-  options: PropTypes.array.isRequired,
-  onAnswerUpdate: PropTypes.func.isRequired,
+  options: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 }
 
 export default Checkbox

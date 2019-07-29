@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, createRef} from 'react'
 import {StyledContexMenuContainer, ContextMenu} from './styled'
-import Button from "../Button";
+import Button from '../Button'
+import PropTypes from 'prop-types'
 
-export const ContextMenuContainer = ({
-  children,
-  onTextRemove,
-  onLogoRemove,
-}) => {
-  const containerRef = React.createRef()
-  const contextMenu = React.createRef()
-
+const ContextMenuContainer = ({children, onTextRemove, onLogoRemove}) => {
+  const containerRef = createRef()
   const [isMenuVisible, setMenuVisibility] = useState(false)
-  const [target, setTarget] = useState(null)
   const [menuPosition, setPosition] = useState({})
+  const [target, setTarget] = useState(null)
 
   const onOutsideClick = () => {
     setMenuVisibility(false)
   }
+
+  useEffect(() => {
+    window.addEventListener('click', onOutsideClick)
+    return () => window.removeEventListener('click', onOutsideClick)
+  })
 
   useEffect(() => {
     if (target) {
@@ -35,13 +35,12 @@ export const ContextMenuContainer = ({
         left: targetLeft - containerLeft,
       })
     }
-  }, [target])
+  }, [target, containerRef])
 
   const onContextMenu = e => {
     e.persist()
 
     if (e.target.dataset.id) {
-      console.log('onContextMenu')
       e.preventDefault()
       setMenuVisibility(true)
       setTarget(e.target)
@@ -49,6 +48,7 @@ export const ContextMenuContainer = ({
     }
     setMenuVisibility(false)
   }
+
   const onRemoveClick = () => {
     const {id, type} = target.dataset
     type === 'TEXT' ? onTextRemove(id) : onLogoRemove(id)
@@ -62,10 +62,18 @@ export const ContextMenuContainer = ({
     >
       {children}
       {isMenuVisible && (
-        <ContextMenu ref={contextMenu} {...menuPosition}>
-          <Button buttonText="X" type="danger" onClick={onRemoveClick} />
+        <ContextMenu {...menuPosition}>
+          <Button buttonText="X" onClick={onRemoveClick} type="danger" />
         </ContextMenu>
       )}
     </StyledContexMenuContainer>
   )
 }
+
+ContextMenuContainer.propTypes = {
+  children: PropTypes.element,
+  onLogoRemove: PropTypes.func.isRequired,
+  onTextRemove: PropTypes.func.isRequired,
+}
+
+export default ContextMenuContainer

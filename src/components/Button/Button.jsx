@@ -40,7 +40,6 @@ Button.defaultProps = {
   buttonText: 'Lorem Ipsum',
   disabled: false,
   block: false,
-  onClick: () => ({}),
 }
 
 export default Button

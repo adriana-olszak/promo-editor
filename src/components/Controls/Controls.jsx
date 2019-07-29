@@ -5,7 +5,7 @@ import Button from '../Button'
 import Card from '../Card'
 
 const Controls = ({undo, redo, resetStore, isUndoDisabled, isRedoDisabled}) => (
-  <Card headerText="Control center">
+  <Card gridArea="controls" headerText="Control center">
     <Button buttonText="Undo" disabled={isUndoDisabled} onClick={undo} />
     <Button buttonText="Redo" disabled={isRedoDisabled} onClick={redo} />
     <Button buttonText="Clear" onClick={resetStore} type="danger" />

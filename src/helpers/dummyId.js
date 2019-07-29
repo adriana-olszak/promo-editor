@@ -1,5 +1,5 @@
-// Just for sake of generating some uniqueness on acceptable level
-// for this kind of POV
+// Just for sake of generating some uniqueness.
+// It's acceptable for this kind of POV
 // on production level such code would be never used.
 
 export const generateId = () =>

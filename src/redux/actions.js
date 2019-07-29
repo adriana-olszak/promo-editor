@@ -22,14 +22,6 @@ export const logoMoved = ({id, type, top, left}) => ({
   left,
 })
 
-export const LOGO_RESIZED = 'LOGO_RESIZED'
-export const logoResized = ({id, name, size}) => ({
-  type: LOGO_RESIZED,
-  id,
-  name,
-  size,
-})
-
 export const TEXT_ADDED = 'TEXT_ADDED'
 export const textAdded = ({id, color, text, fontFamily, textDecoration}) => ({
   type: TEXT_ADDED,

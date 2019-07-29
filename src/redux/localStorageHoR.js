@@ -15,8 +15,8 @@ export const loadState = key => {
 export function localstorage(key, reducer) {
   return function(state, action) {
     let nextState = reducer(state, action)
+    const storageState = loadState(key)
 
-    let storageState = loadState(key)
     if (action.type === RESET_STORE) {
       localStorage.removeItem(key)
     } else if ((!state && storageState) || action.type === '@@redux/INIT') {

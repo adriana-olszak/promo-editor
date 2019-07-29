@@ -19,14 +19,6 @@ const Text = ({
     item: {id, left, top, type: 'TEXT'},
     begin: monitor => {
       const {x, y} = monitor.getInitialSourceClientOffset()
-      console.log(
-        monitor.getInitialSourceClientOffset(),
-        'monitor.getInitialSourceClientOffset()'
-      )
-      console.log(
-        monitor.getInitialClientOffset(),
-        'monitor.getInitialClientOffset()'
-      )
       return {
         left: x,
         top: y,
@@ -65,6 +57,12 @@ Text.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   type: PropTypes.string.isRequired,
+  center: PropTypes.bool,
+  color: PropTypes.string,
+  fontFamily: PropTypes.string,
+  textDecoration: PropTypes.arrayOf(PropTypes.string),
+  text: PropTypes.string,
+  onContextMenu: PropTypes.func,
 }
 
 export default Text

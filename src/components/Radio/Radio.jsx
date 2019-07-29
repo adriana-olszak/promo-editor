@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Radio = ({value, label, name, isChecked, onChange}) => {
   return (
@@ -16,8 +17,12 @@ const Radio = ({value, label, name, isChecked, onChange}) => {
   )
 }
 
-Radio.propTypes = {}
-
-Radio.defaultProps = {}
+Radio.propTypes = {
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
 
 export default Radio

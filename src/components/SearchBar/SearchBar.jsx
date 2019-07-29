@@ -1,14 +1,9 @@
 import React, {useState} from 'react'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Button from '../Button'
 import Input from '../Input'
-import PropTypes from 'prop-types'
-
-const StyledSearchBar = styled.div`
-  display: flex;
-  margin-top: 12px;
-`
+import {StyledSearchBar} from './styled'
 
 const SearchBar = ({onClick}) => {
   const [inputValue, setInputValue] = useState('')
@@ -18,7 +13,7 @@ const SearchBar = ({onClick}) => {
     <StyledSearchBar>
       <Input
         onChange={e => setInputValue(e.target.value)}
-        placeholder="Light, brigth etc."
+        placeholder="Light, bright etc."
         value={inputValue}
       />
       <Button buttonText="Search" onClick={onSearchClick} />

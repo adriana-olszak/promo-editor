@@ -46,15 +46,17 @@ const TextControl = ({onAdd}) => {
   return (
     <StyledText gridArea="text" headerText="Add texts">
       <Input
-        placeholder="Put your text in here"
         onChange={e => setInputValue(e.target.value)}
+        placeholder="Text in here"
+        style={{width: '100%'}}
         value={inputValue}
       />
       <Fieldset>
-        <Label>{'FontFamily'}</Label>
+        <Label>{'Font family'}</Label>
         {Object.values(FontTypes).map(fontFamily => (
           <Radio
             isChecked={fontFamily === fontFamilyValue}
+            key={fontFamily}
             label={fontFamily}
             name="fontFamily"
             onChange={e => setFontFamilyValue(e.target.value)}
@@ -63,9 +65,9 @@ const TextControl = ({onAdd}) => {
         ))}
       </Fieldset>
       <Fieldset>
-        <Label>{'Text Decoration'}</Label>
+        <Label>{'Text decoration'}</Label>
         <Checkbox
-          label={'Text Decoration'}
+          label={'Text decoration'}
           name="textDecoration"
           onChange={setTextDecorationValue}
           options={textDecorationTypes}
@@ -74,12 +76,12 @@ const TextControl = ({onAdd}) => {
       </Fieldset>
       <ColorInput
         label="Select font color"
+        name="fontColor"
         onChange={e => setColorValue(e.target.value)}
         type="color"
-        name="fontColor"
         value={colorValue}
       />
-      <Button onClick={onTextAdd} buttonText="Add text" />
+      <Button buttonText="Add text" onClick={onTextAdd} />
     </StyledText>
   )
 }
