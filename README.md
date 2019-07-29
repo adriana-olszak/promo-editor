@@ -8,7 +8,7 @@ To run app in developer mode (only this one was prepared for this task) run comm
   yarn && yarn start
 ```
 
-Application will be available on `http://localhost:3000`
+Application will be available at `http://localhost:3000`
 
 ## Features
 
@@ -17,7 +17,7 @@ Application will be available on `http://localhost:3000`
 - User can select from 4 backgrounds fetched on app init
 - Click on background thumbnail - sets image as background for editor area
 - Click on “Delete Background” - cleans background
-- user can search for background by given keywords
+- User can search for background by given keywords
 
 ### Logo area (4h + 1h bug fix)
 
@@ -46,8 +46,8 @@ Application will be available on `http://localhost:3000`
 ### Save / Load (1h)
 
 - Automatically saves after every change.
-- automatically loads last state window refresh.
-- undo/redo possibility of last 5 changes
+- Automatically loads last state after window refresh.
+- Undo/redo possibility of last 5 changes
 
 ### Styles (1h)
 
@@ -64,8 +64,9 @@ If we will write test it will also minimise the complexity of test if we abstrac
 ### Fetch
 
 For fetching images I used browser Fetch API that have all what is needed to perform such a simple task.
-For bigger application I'll use RxJS (redux-observable) which will allow e.g. cancellation of request or dispach of multiple actions.
+For bigger application I would use RxJS (redux-observable) which will allow e.g. cancellation of request or multi-action dispach.
 
 ## Pain points during development
+In general all pain points were strongly connected with not knowing react-dnd package specifics. In detail:
 1. Positioning of elements using react-dnd monitors when drop element is dragged from outside of target.
 2. Positioning of texts in the center of target.
