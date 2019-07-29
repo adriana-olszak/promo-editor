@@ -53,6 +53,7 @@ const AppWrapper = styled.div`
  * [x] OnBoarding text? below square area with info about auto save etc
  * [x] UI improvements (inputs buttons)
  * [x] clear button should clear :D
+ * [ ] click on add text without text adds black 20px on the middle of editor
  * [ ] readme
  * [ ] code clean up
  * [ ] tests

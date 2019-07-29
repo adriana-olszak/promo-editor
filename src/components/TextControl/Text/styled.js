@@ -1,31 +1,41 @@
 import styled, {css} from 'styled-components'
+const getTextDecoration = textDecorations =>
+  textDecorations.reduce((acc, curr) => {
+    switch (curr) {
+      case 'BOLD':
+        return acc + 'font-weight: bold;'
+      case 'ITALIC':
+        return acc + 'font-style: italic;'
+      case 'UNDERLINE':
+        return acc + 'text-decoration: underline;'
+    }
+    return acc
+  }, '')
 
 export const StyledText = styled.div`
   position: absolute;
+  font-size: 20px;
   border: 1px dashed gray;
   padding: 0.5rem 1rem;
   cursor: move;
-  top: ${props => props.top}px;
-  left: ${props => props.left}px;
-  color: ${props => props.color || 'initial'};
-  font-family: ${props => props.fontFamily || 'inherit'};
   
-  ${props => {
-    switch (props.textDecoration) {
-      case 'bold':
-        return css`
-          font-weight: bold;
+  ${({top, left, center}) =>
+    center
+      ? css`
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         `
-      case 'italic':
-        return css`
-          font-style: italic;
-        `
-      case 'underline':
-        return css`
-          text-decoration: underline;
-        `
-    }
-  }};
+      : css`
+          top: ${top}px;
+          left: ${left}px;
+        `}
+  
+  color: ${props => props.color || 'black'};
+  font-family: ${props => props.fontFamily || 'inherit'};
+
+  ${props =>
+    props.textDecoration.length && getTextDecoration(props.textDecoration)};
 
   ${props =>
     props.isDragging

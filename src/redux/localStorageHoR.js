@@ -12,7 +12,7 @@ export const loadState = key => {
   }
 }
 
-export function localstorageMeta(key, reducer) {
+export function localstorage(key, reducer) {
   return function(state, action) {
     let nextState = reducer(state, action)
 

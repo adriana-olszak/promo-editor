@@ -5,6 +5,8 @@ import {generateId} from '../../helpers/dummyId'
 import Radio from '../Radio'
 import Input from '../Input'
 import Button from '../Button'
+import PropTypes from 'prop-types'
+import Checkbox from '../Checkbox'
 
 const FontTypes = {
   ARIAL: 'Arial',
@@ -16,28 +18,25 @@ const textDecorationTypes = {
   BOLD: 'bold',
   UNDERLINE: 'underline',
   ITALIC: 'italic',
-  DEFAULT: 'initial',
 }
 
 const TextControl = ({onAdd}) => {
   const [inputValue, setInputValue] = useState('')
   const [fontFamilyValue, setFontFamilyValue] = useState(FontTypes.ARIAL)
-  const [textDecorationValue, setTextDecorationValue] = useState(
-    textDecorationTypes.DEFAULT
-  )
+  const [textDecorationValue, setTextDecorationValue] = useState([])
   const [colorValue, setColorValue] = useState('#222222')
 
   const setInitialState = () => {
     setInputValue('')
     setFontFamilyValue(FontTypes.ARIAL)
-    setTextDecorationValue(textDecorationTypes.DEFAULT)
+    setTextDecorationValue([])
     setColorValue('#222222')
   }
 
   const onTextAdd = () => {
     onAdd({
       id: generateId(),
-      text: inputValue,
+      text: inputValue || 'black 20px',
       fontFamily: fontFamilyValue,
       textDecoration: textDecorationValue,
       color: colorValue,
@@ -65,15 +64,13 @@ const TextControl = ({onAdd}) => {
       </Fieldset>
       <Fieldset>
         <Label>{'Text Decoration'}</Label>
-        {Object.values(textDecorationTypes).map(textDecoration => (
-          <Radio
-            isChecked={textDecoration === textDecorationValue}
-            label={textDecoration}
-            name="textDecoration"
-            onChange={e => setTextDecorationValue(e.target.value)}
-            value={textDecoration}
-          />
-        ))}
+        <Checkbox
+          label={'Text Decoration'}
+          name="textDecoration"
+          onChange={setTextDecorationValue}
+          options={textDecorationTypes}
+          selected={textDecorationValue}
+        />
       </Fieldset>
       <ColorInput
         label="Select font color"
@@ -87,7 +84,9 @@ const TextControl = ({onAdd}) => {
   )
 }
 
-TextControl.propTypes = {}
+TextControl.propTypes = {
+  onAdd: PropTypes.func.isRequired,
+}
 
 TextControl.defaultProps = {}
 

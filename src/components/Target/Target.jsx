@@ -22,13 +22,15 @@ const Target = ({
   texts,
   backgroundSrc,
 }) => {
+  const targetWidth = 400
   const downloadRef = useRef(null)
   const [{isOver}, drop] = useDrop({
     accept: [...Object.keys(LogoTypes), 'TEXT'],
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset()
-      const left = Math.round(item.left + delta.x)
-      const top = Math.round(item.top + delta.y)
+      // this calculations are required due to change of context
+      const left = Math.round(item.left + delta.x - item.width - targetWidth)
+      const top = Math.round(item.top + delta.y - item.height)
 
       if (item.type === 'TEXT') {
         onTextMove({...item, top, left})
@@ -74,8 +76,18 @@ const Target = ({
                 )
               )}
               {Object.values(texts).map(
-                ({id, left, top, fontFamily, textDecoration, text, color}) => (
+                ({
+                  id,
+                  left,
+                  top,
+                  center,
+                  fontFamily,
+                  textDecoration,
+                  text,
+                  color,
+                }) => (
                   <Text
+                    center={center}
                     color={color}
                     fontFamily={fontFamily}
                     id={id}
@@ -111,17 +123,17 @@ Target.propTypes = {
   onLogoDrop: PropTypes.func.isRequired,
   onLogoMove: PropTypes.func.isRequired,
   onTextMove: PropTypes.func.isRequired,
-  logos: PropTypes.arrayOf(
+  logos: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
+      // width: PropTypes.number.isRequired,
+      // height: PropTypes.number.isRequired,
       top: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,
     })
   ),
-  texts: PropTypes.arrayOf(
+  texts: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       fontFamily: PropTypes.string.isRequired,

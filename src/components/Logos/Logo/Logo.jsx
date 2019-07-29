@@ -27,8 +27,8 @@ const getLogo = type => {
 
 const Logo = ({
   id = null,
-  left = 450,
-  top = 0,
+  left,
+  top,
   type,
   width = 100,
   height = 100,
@@ -37,6 +37,17 @@ const Logo = ({
 }) => {
   const [{isDragging}, drag] = useDrag({
     item: {id, left, top, type: `${type}`, width, height},
+    begin: monitor => {
+      const {x, y} = monitor.getInitialSourceClientOffset()
+      return {
+        left: x,
+        top: y,
+        type,
+        id,
+        width,
+        height,
+      }
+    },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
